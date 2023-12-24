@@ -35,18 +35,32 @@ int main()
     }
     sort(weight.begin(), weight.end());  // Сортировка масс от наименьшей к наибольшей
     std::vector <int> packages;
-    // Заполняю каждый рюкзак наибольшей по весу вещью
-    for (int i = 0; i < friends; i++) {
-        packages.push_back(weight[items - i - 1]);
+    if (friends < items) {
+        // Заполняю каждый рюкзак наибольшей по весу вещью
+        for (int i = 0; i < friends; i++) {
+            packages.push_back(weight[items - i - 1]);
+        }
+        for (int i = friends - 1; i < items - 1; i++) {
+            sort(packages.begin(), packages.end());
+            packages[0] += weight[items - i - 1];
+        }
+        std::cout << std::endl << std::endl << "Итоговое распределение: " << std::endl;
+        for (int i = 0; i < friends; i++) {
+            std::cout << "Вес рюкзака " << i + 1 << ": " << packages[i] << std::endl;
+        }
     }
-    for (int i = friends - 1; i < items-1; i++) {
-        sort(packages.begin(), packages.end());
-        packages[0] += weight[items - i - 1];
+    else {
+        for (int i = 0; i < items; i++) {
+            packages.push_back(weight[i]);
+        }
+        std::cout << std::endl << std::endl << "Итоговое распределение: " << std::endl;
+        for (int i = 0; i < items; i++) {
+            std::cout << "Вес рюкзака " << i + 1 << ": " << packages[i] << std::endl;
+        }
+        std::cout << "У остальных рюкзаки пустые.";
     }
-    std::cout << std::endl << std::endl << "Итоговое распределение: " << std::endl;
-    for (int i = 0; i < friends; i++) {
-        std::cout << "Вес рюкзака " << i + 1 << ": " << packages[i] << std::endl;
-    }
+
+
     return 0;
 }
 
