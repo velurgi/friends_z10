@@ -21,23 +21,32 @@ int main()
     std::cin >> friends;
     friends = intCheck(friends);
     std::cout << "Введите количество вещей: " << std::endl;
-    unsigned int things = 1;
-    std::cin >> things;
-    things = intCheck(things);
+    unsigned int items = 1;
+    std::cin >> items;
+    items = intCheck(items);
     std::vector <int> weight;
     //Ввод масс вещей
-    for (int i = 1; i < things+1; i++) { 
+    for (int i = 1; i < items+1; i++) { 
         std::cout << "Масса вещи " << i << ": ";
         int j = 1;
         std::cin >> j;
         j = intCheck(j);
         weight.push_back(j);
     }
-    sort(weight.begin(zz), weight.end());  // Сортировка масс от наименьшей к наибольшей
-    
-
-
-
+    sort(weight.begin(), weight.end());  // Сортировка масс от наименьшей к наибольшей
+    std::vector <int> packages;
+    // Заполняю каждый рюкзак наибольшей по весу вещью
+    for (int i = 0; i < friends; i++) {
+        packages.push_back(weight[items - i - 1]);
+    }
+    for (int i = friends - 1; i < items-1; i++) {
+        sort(packages.begin(), packages.end());
+        packages[0] += weight[items - i - 1];
+    }
+    std::cout << std::endl << std::endl << "Итоговое распределение: " << std::endl;
+    for (int i = 0; i < friends; i++) {
+        std::cout << "Вес рюкзака " << i + 1 << ": " << packages[i] << std::endl;
+    }
     return 0;
 }
 
