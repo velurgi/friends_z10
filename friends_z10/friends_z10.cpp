@@ -33,7 +33,7 @@ int main()
         j = intCheck(j);
         weight.push_back(j);
     }
-    sort(weight.begin(), weight.end());  // Сортировка масс от наименьшей к наибольшей
+    sort(weight.begin(zz), weight.end());  // Сортировка масс от наименьшей к наибольшей
     
 
 
